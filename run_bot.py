@@ -1,16 +1,15 @@
 import os
 import django
 
-# Устанавливаем настройки Django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "flower_bot.settings")
 
-# Инициализируем Django
 django.setup()
 
+from bot_tools.handlers import router
 import asyncio
 from aiogram import Bot, Dispatcher
 
-# Импортируйте ваш бот и другие компоненты только после настройки Django
+
 TOKEN = "7795792004:AAHtjant11V7Nq10kbYh91WxyDozle5qKo0"
 
 
@@ -18,7 +17,7 @@ async def main():
     bot = Bot(token=TOKEN)
     dp = Dispatcher()
 
-
+    dp.include_router(router)
     print("Бот запущен!")
     await dp.start_polling(bot)
 
